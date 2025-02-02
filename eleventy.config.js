@@ -8,12 +8,13 @@ export default async function(eleventyConfig) {
 	importer.setVerbose(true); // --quiet
 	importer.setSafeMode(true); // --overwrite
 	importer.setDryRun(false); // --dryrun
-	//importer.setDraftsFolder("drafts");
-	//importer.setAssetsFolder("assets");
-	importer.setAssetReferenceType("relative"); // --assetrefs
+	importer.setDraftsFolder("drafts");
+	importer.setAssetsFolder("assets");
+	importer.setAssetReferenceType("disabled"); // --assetrefs
 	
+
 	// Sources (one or more)
-	importer.addSource("wordpress", "http://aqdesigndev.wpenginepowered.com/");
+	importer.addSource("wordpress", "https://aqdesigndev.wpenginepowered.com/");
 	
 	let entries = await importer.getEntries({
 		contentType: "markdown", // --format
@@ -21,9 +22,9 @@ export default async function(eleventyConfig) {
 	});
 	
 	await importer.toFiles(entries);
-	
+
 	importer.logResults();	
-};
+}
 
 export const config = {
 	templateFormats: [
