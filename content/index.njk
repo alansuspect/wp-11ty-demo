@@ -2,13 +2,27 @@
 layout: base.njk
 title: My Rad Liquid Blog Post
 ---
+
 <h1>{{ title }}</h1>
 
-<ol reversed class="postlist">
-{%- for post in postslist | reverse %}
-	<li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
-		<a href="{{ post.url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
-		<time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("LLLL yyyy") }}</time>
-	</li>
-{%- endfor %}
-</ol>
+<ul>
+{%- for post in collections.posts -%}
+  <li>
+	<a href="{{ post.url }}" title="{{ post.data.title }}">title: {{ post.data.title }}</a><br />
+	<span>authors - name: {{ post.data.authors[0].name }}</span><br />
+	<span>authors - url: {{ post.data.authors[0].url }}</span><br />
+	<span>authors - avatarUrl: {{ post.data.authors[0].avatarUrl }}</span><br />	
+	<span>date: {{ post.data.date }}</span><br />
+	<span>metadata - categories: {{ post.data.metadata.categories }}</span><br />	
+	<span>metadata - tags: {{ post.data.metadata.tags }}</span><br />	
+	<span>metadata - uuid: {{ post.data.metadata.uuid }}</span><br />
+	<span>metadata - type: {{ post.data.metadata.type }}</span><br />	
+	<span>metadata - url: {{ post.data.metadata.url }}</span><br />	
+	<span>tags: {{ post.data.tags }}</span><br />
+	<span>feature image: </span><br />
+	<img src="{{ post.data.metadata.media.featuredImage }}" alt="{{ post.data.title }}">
+
+
+  </li>
+{%- endfor -%}
+</ul>
